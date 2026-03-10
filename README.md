@@ -1,9 +1,9 @@
 🪖 Helmet Safety Detection using YOLOv8
+
 📌 Overview
 
 This project implements a real-time helmet safety detection system using Ultralytics YOLO and OpenCV.
 The model is trained to detect different helmet safety conditions and can run on images, videos, and live webcam feeds.
-
 The goal of the system is to help monitor motorcycle rider safety and identify violations where riders are not wearing helmets.
 
 🎯 Features
