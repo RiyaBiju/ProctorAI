@@ -25,4 +25,20 @@ The system aims to assist in ppe detection by identifying workers are not wearin
 
 ---
 
-## Project Structure
+best.pt
+Trained YOLO model weights used for detecting Personal Protective Equipment (PPE) such as helmets from images or video streams.
+
+code (1).ipynb
+Jupyter Notebook used for model training, experimentation, and testing object detection results during development.
+
+detect_webcam.py
+Python script that runs the trained YOLO model on a live webcam feed to detect PPE in real-time.
+
+requirements.txt
+List of required Python libraries and dependencies needed to run the project (e.g., OpenCV, PyTorch, Ultralytics YOLO).
+
+results.csv
+Stores detection results such as predicted classes, confidence scores, and other evaluation outputs from the model.
+
+test_video.py
+Script used to test the PPE detection model on pre-recorded video files instead of a live webcam.
