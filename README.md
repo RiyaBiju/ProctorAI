@@ -1,4 +1,4 @@
-# Helmet Safety Detection using YOLOv8
+# Hard Hat Safety Detection using YOLOv8
 
 ## Overview
 This project implements a real-time helmet safety detection system using the YOLOv8 object detection framework. The model is trained to detect different helmet safety conditions and can run on images, videos, and live webcam feeds.
