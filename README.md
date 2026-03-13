@@ -25,44 +25,58 @@ The system aims to assist in ppe detection by identifying workers are not wearin
 
 ---
 
-README.md
+📄 README.md
 
-Contains the project overview, objectives, and instructions to run the PPE detection system.
+Contains the project overview, objectives, setup instructions, and usage guide for the PPE detection system.
 
-Provides information about the technologies used and how the project works.
+🤖 best.pt
 
-best.pt
+The trained YOLO model weights used for detecting Personal Protective Equipment (PPE) such as helmets.
 
-Stores the trained YOLO model weights.
+📓 code (1).ipynb
 
-This file is used by the detection scripts to identify Personal Protective Equipment (PPE) such as helmets in images or videos.
+A Jupyter Notebook used during development for:
 
-code (1).ipynb
+Training the YOLO model
 
-A Jupyter Notebook used during the development phase.
+Testing detection results
 
-Includes code for training the YOLO model, testing predictions, and experimenting with parameters.
+Experimenting with parameters and dataset
 
-detect_webcam.py
+📷 detect_webcam.py
 
 Python script for real-time PPE detection using a webcam.
 
-Captures live video frames and applies the trained YOLO model to detect safety equipment.
+Functions:
 
-requirements.txt
+Captures live webcam frames
 
-Lists all Python libraries and dependencies required to run the project.
+Runs YOLO object detection
 
-Helps users install necessary packages easily using pip install -r requirements.txt.
+Displays bounding boxes for detected PPE
 
-results.csv
+📦 requirements.txt
 
-Stores detection results and output data generated during model evaluation or testing.
+Contains the list of required Python libraries needed to run the project.
 
-May include predictions, confidence scores, and other metrics.
+Example dependencies may include:
 
-test_video.py
+PyTorch
 
-Script used to run PPE detection on pre-recorded video files.
+OpenCV
 
-Processes video frames and applies the trained model to detect helmets and other safety gear.
+Ultralytics YOLO
+
+📊 results.csv
+
+Stores model output results such as:
+
+Predicted classes
+
+Confidence scores
+
+Detection statistics
+
+🎥 test_video.py
+
+Script used to run PPE detection on recorded video files instead of live webcam input
