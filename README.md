@@ -1,75 +1,28 @@
-🪖 Helmet Safety Detection using YOLOv8
+# Helmet Safety Detection using YOLOv8
 
-📌 Overview
+## Overview
+This project implements a real-time helmet safety detection system using the YOLOv8 object detection framework. The model is trained to detect different helmet safety conditions and can run on images, videos, and live webcam feeds.
 
-This project implements a real-time helmet safety detection system using Ultralytics YOLO and OpenCV.
-The model is trained to detect different helmet safety conditions and can run on images, videos, and live webcam feeds.
-The goal of the system is to help monitor motorcycle rider safety and identify violations where riders are not wearing helmets.
+The system aims to assist in monitoring motorcycle rider safety by identifying violations such as riders not wearing helmets or wearing helmets improperly.
 
-🎯 Features
+---
 
-Detects Safe Helmet
+## Features
+- Real-time helmet detection
+- Detection on images
+- Detection on video files
+- Live webcam detection
+- CSV logging of detection results
+- Custom-trained YOLOv8 model
 
-Detects Unsafe Helmet
+---
 
-Detects No Helmet
+## Technologies Used
+- Python
+- Ultralytics YOLOv8
+- OpenCV
+- NumPy
 
-Works on:
+---
 
-Images
-
-Videos
-
-Live webcam
-
-Real-time object detection
-
-Option to save detection results to CSV
-
-Lightweight YOLOv8 model for fast inference
-
-🧠 Model
-
-The detection model is trained using YOLOv8, a modern object detection architecture known for its speed and accuracy.
-
-Model used:
-
-yolov8s.pt
-
-Final trained weights:
-
-best.pt
-🗂 Dataset
-
-The dataset was created by combining and cleaning multiple headwear-related datasets.
-
-Classes
-0 → safe_helmet
-1 → unsafe_helmet
-2 → no_helmet
-Dataset Structure
-dataset/
- ├── images/
- │    ├── train
- │    ├── val
- │    └── test
- └── labels/
-      ├── train
-      ├── val
-      └── test
-
-Total training images: ~5000+
-
-⚙️ Installation
-
-Install the required libraries:
-
-pip install ultralytics opencv-python
-
-Required tools:
-
-Python
-
-Ultralytics YOLO
-
-OpenCV
+## Project Structure
