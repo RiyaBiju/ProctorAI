@@ -25,89 +25,49 @@ The system aims to assist in ppe detection by identifying workers are not wearin
 
 ---
 
-📄 README.md
+best.pt              # Trained YOLOv8 model weights
+├── detect_webcam.py     # Real-time detection via webcam
+├── test_video.py        # Detection on recorded video files
+├── code (1).ipynb       # Training and experimentation notebook
+├── results.csv          # Model output: classes, confidence scores, statistics
+├── requirements.txt     # Python dependencies
+└── README.md
 
-Contains the project overview, objectives, setup instructions, and usage guide for the PPE detection system.
+Setup
+Requirements: Python 3.8+
+bashpip install -r requirements.txt
+Key dependencies include PyTorch, OpenCV, and Ultralytics YOLO.
 
-🤖 best.pt
+Usage
+Live webcam detection
+bashpython detect_webcam.py
+Run on a recorded video
+bashpython test_video.py --source path/to/video.mp4
 
-The trained YOLO model weights used for detecting Personal Protective Equipment (PPE) such as helmets.
+Model
 
-📓 code (1).ipynb
-
-A Jupyter Notebook used during development for:
-
-Training the YOLO model
-
-Testing detection results
-
-Experimenting with parameters and dataset
-
-📷 detect_webcam.py
-
-Python script for real-time PPE detection using a webcam.
-
-Functions:
-
-Captures live webcam frames
-
-Runs YOLO object detection
-
-Displays bounding boxes for detected PPE
-
-📦 requirements.txt
-
-Contains the list of required Python libraries needed to run the project.
-
-Example dependencies may include:
-
-PyTorch
-
-OpenCV
-
-Ultralytics YOLO
-
-📊 results.csv
-
-Stores model output results such as:
-
-Predicted classes
-
-Confidence scores
-
-Detection statistics
-
-🎥 test_video.py
-
-Script used to run PPE detection on recorded video files instead of live webcam input
+Architecture: YOLOv8 nano (yolov8n) fine-tuned at 640px input
+Classes: helmet, no-helmet, vest, no-vest, worker
+Tracker: ByteTrack for consistent per-worker IDs across frames
+Dataset source: Roboflow Universe — PPE Detection dataset
 
 
-This workflow detects Personal Protective Equipment (PPE) — such as helmets and safety vests — on construction workers in real-time webcam feeds or recorded video clips. It tracks detected workers and gear across frames to ensure consistent safety monitoring and produces annotated video output for safety oversight.
+How It Works
 
-Approach
-A fine-tuned YOLOv8 nano object detection model identifies workers and their PPE (helmets, vests, etc.) in each frame. Detected objects are passed to a ByteTrack tracker to maintain consistent IDs across frames — critical for monitoring compliance over time. Bounding boxes and labels are rendered on each frame, and a running count of detected PPE items is computed per frame.
+Each video frame is passed to the YOLOv8 model for object detection
+Detections are handed to ByteTrack, which assigns and maintains a unique ID per worker across frames
+Bounding boxes and labels are drawn on the frame with color coding by class
+Per-frame counts are computed for each class (workers present, helmets detected, violations, etc.)
+Annotated frames are written to the output stream or saved to disk
 
-Models
-PPE Detection Model: yolov8n-640 (YOLOv8 nano) fine-tuned for construction PPE classes such as helmet, vest, worker, no-helmet, no-vest. Train or source a dataset from Roboflow Universe (e.g., roboflow-100/ppe-detection).
-Workflow Steps
-Input: Accept an image (frame from webcam or video clip — the platform handles frame extraction automatically).
 
-Detect PPE and workers: Run the YOLOv8 nano PPE detection model on the incoming frame to identify workers and their safety equipment (helmets, vests, and violations like missing gear). [Object Detection Model]
+Outputs
+OutputDescriptionAnnotated videoFrames with bounding boxes and class labels overlaidPer-frame countsNumber of workers, PPE items detected, and violationsTracked predictionsRaw JSON with track IDs, class names, confidence scores
 
-Track detections across frames: Pass the detections to ByteTrack to assign and maintain consistent object IDs across video frames, enabling per-worker tracking over time. [Byte Tracker]
+Extending the System
+Alerts — Add a condition check for no-helmet or no-vest detections and route to a Slack or email notification.
+Logging — Pipe the raw predictions (track IDs, class names, confidence scores, timestamps) to a database or dashboard for compliance reporting and audit trails.
+Retraining — Validate the model on your own site footage. Use active learning by uploading new annotated frames to Roboflow and retraining periodically to improve accuracy for your environment.
 
-Visualize bounding boxes: Draw color-coded bounding boxes around each tracked detection (workers, helmets, vests, violations) on the frame. [Bounding Box Visualization]
-
-Overlay labels: Render class name (e.g., "Helmet", "No Vest") and confidence score labels on each bounding box, positioned above each detection for readability. [Label Visualization]
-
-Count detections per class: Compute the total number of detections per frame (e.g., number of workers, helmets present, violations detected) using a property definition. [Property Definition]
-
-Outputs:
-
-Annotated video frame with bounding boxes and class labels.
-Per-frame detection count (total workers, PPE items, violations).
-Raw tracked predictions (with track IDs) for downstream processing.
-Beyond the Workflow
-Alerting: If you want to trigger alerts when a worker is detected without a helmet or vest, add an [Expression] block to check if any detection has class no-helmet or no-vest, and route to a [Slack Notification] or [Email Notification] block.
-Logging: Pipe the raw predictions JSON (including track IDs, class names, confidence scores, and timestamps) to a database or dashboard system outside the workflow for compliance reporting and audit trails.
-Model training: If using a pre-built model from Roboflow Universe, validate it on your site-specific footage and retrain via active learning using [Roboflow Dataset Upload] to continuously improve accuracy.
+License
+This project is for educational and research use
